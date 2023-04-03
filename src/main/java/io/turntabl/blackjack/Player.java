@@ -22,12 +22,6 @@ public final class Player {
         this.name = name;
     }
 
-    private boolean canPlay() {
-
-        return false;
-    }
-
-
     public void addCard(Card card) {
         if(this.hand.isEmpty()) {
             hand = new ArrayList<>();

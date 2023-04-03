@@ -6,19 +6,31 @@ import java.util.List;
 public class Game {
     private Deck cardDeck;
     private List<Player> playerList;
-    private final int NUM_OF_PLAYERS;
+    private static final int DEFAULT_NUM_OF_PLAYERS = 3;
+    private static final int MAX_NUM_OF_PLAYERS = 6;
 
-    public Game(int NUM_OF_PLAYERS) {
-        this.NUM_OF_PLAYERS = NUM_OF_PLAYERS;
+    private static final int MAX_SCORE = 21;
+
+    private int numberOfPlayers;
+
+    public Game(int numberOfPlayers) {
+        //this.NUM_OF_PLAYERS = NUM_OF_PLAYERS;
+        this.numberOfPlayers = numberOfPlayers;
+        if(numberOfPlayers <= 1 || numberOfPlayers > MAX_NUM_OF_PLAYERS) {
+            //we cannot start game here
+            throw new IllegalArgumentException("Number of players must be between 2 and " + MAX_NUM_OF_PLAYERS);
+        }
         cardDeck = new Deck();
         cardDeck.initialize();
 
         setupPlayers();
-        dealHands();
+
+        //Do not deal hands on game initialization, dealHands should be called when game starts
+        //dealHands();
     }
 
     public void setupPlayers(){
-        for(int i = 1; i <= this.NUM_OF_PLAYERS; i++){
+        for(int i = 1; i <= this.numberOfPlayers; i++){
             Player player = new Player("Player "+i);
             playerList.add(player);
         }
@@ -43,26 +55,36 @@ public class Game {
     }
 
     public void play(){
+        dealHands();
+        boolean allPlayersHaveStickStatus = false;
+        int highScore = 0;
         while(!cardDeck.getCards().empty()){
             newRound();
-
             for(Player player : playerList){
+                int playerTotal = player.getValueOfHand();
+                //check for winner
+                if(playerTotal > highScore && playerTotal <= MAX_SCORE) {
+                    //Set the player hasWon to true
+                    player.setHasWon(true);
+                }
 
             }
         }
 
-        //check for winner
     }
 
     public void newRound(){
         //check player status
         for(Player player : playerList){
             if(player.getStatus() == PlayerStatus.BUST){
+                System.out.println(player.getName() + " goes bust with total value of hand " + player.getValueOfHand());
                 playerList.remove(player);
             } else if(player.getStatus() == PlayerStatus.HIT){
+                System.out.println(player.getName() + " goes hit with total value of hand " + player.getValueOfHand());
                 player.addCard(cardDeck.getCards().pop());
+                System.out.println(player.getName() + " handed a new card " + player.getHand().toString());
             } else if(player.getStatus() == PlayerStatus.STICK){
-
+                System.out.println(player.getName() + " goes stick with total value of hand " + player.getValueOfHand());
             }
 
 
