@@ -23,6 +23,7 @@ public class Player {
         return false;
     }
 
+
     public void addCard(Card card) {
         if(this.hand.isEmpty()) {
             hand = new ArrayList<>();
