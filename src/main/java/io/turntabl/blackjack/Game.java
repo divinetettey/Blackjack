@@ -36,13 +36,40 @@ public class Game {
                         cardDeck.getCards().pop()
                 );
             }
-        }
 
+            playerList.get(i).checkStatus();
+        }
 
     }
 
     public void play(){
+        while(!cardDeck.getCards().empty()){
+            newRound();
 
+            for(Player player : playerList){
+
+            }
+        }
+
+        //check for winner
     }
 
+    public void newRound(){
+        //check player status
+        for(Player player : playerList){
+            if(player.getStatus() == PlayerStatus.BUST){
+                playerList.remove(player);
+            } else if(player.getStatus() == PlayerStatus.HIT){
+                player.addCard(cardDeck.getCards().pop());
+            } else if(player.getStatus() == PlayerStatus.STICK){
+
+            }
+
+
+        }
+    }
+
+    public void getWinner() {
+
+    }
 }
