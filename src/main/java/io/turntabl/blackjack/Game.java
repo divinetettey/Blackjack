@@ -12,6 +12,7 @@ public class Game {
     private static final int MAX_SCORE = 21;
 
     private int numberOfPlayers;
+    private boolean isGameEnd = false;
 
     public Game(int numberOfPlayers) {
         //this.NUM_OF_PLAYERS = NUM_OF_PLAYERS;
@@ -56,22 +57,38 @@ public class Game {
 
     public void play(){
         dealHands();
-        boolean allPlayersHaveStickStatus = false;
+        boolean allPlayersHaveStickStatus = true;
         int highScore = 0;
         while(!cardDeck.getCards().empty()){
             newRound();
             for(Player player : playerList){
+
+                //Check all players have stick
+                if(player.getStatus() != PlayerStatus.STICK){
+                    allPlayersHaveStickStatus = false;
+                    isGameEnd = true;
+                    //break out of the loop and end game
+                    break;
+                }
                 int playerTotal = player.getValueOfHand();
                 //check for winner
                 if(playerTotal > highScore && playerTotal <= MAX_SCORE) {
                     //Set the player hasWon to true
+                    highScore = playerTotal;
                     player.setHasWon(true);
+                    isGameEnd = true;
                 }
 
             }
         }
 
+        if(allPlayersHaveStickStatus) {
+            System.out.println("All players have a stick. Game ended " + isGameEnd);
+        }
+
+
     }
+
 
     public void newRound(){
         //check player status

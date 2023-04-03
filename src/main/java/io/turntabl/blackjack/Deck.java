@@ -6,6 +6,7 @@ import java.util.Stack;
 
 public class Deck {
     private Stack<Card> cards;
+    private String shuffleType;
 
     public Deck(){
         cards = new Stack<>();
@@ -14,9 +15,17 @@ public class Deck {
     public Deck(Stack<Card> cards){
         this.cards = cards;
     }
+
+    public Deck(String shuffleType){
+        this.shuffleType = shuffleType;
+        cards = new Stack<>();
+    }
+
     public void shuffle(){
+        //TODO: Implement different shuffle types is supplied
         Collections.shuffle(cards);
     }
+
 
     public Stack<Card> getCards() {
         return cards;
@@ -37,6 +46,14 @@ public class Deck {
         }
 
         shuffle();
+    }
+
+    public String getShuffleType() {
+        return shuffleType;
+    }
+
+    public void setShuffleType(String shuffleType) {
+        this.shuffleType = shuffleType;
     }
 
     @Override
