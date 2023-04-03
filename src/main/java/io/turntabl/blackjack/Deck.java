@@ -27,6 +27,7 @@ public class Deck {
     }
 
 
+
     public void initialize() {
         for(Suit suit : Suit.values()){
             for(Rank rank: Rank.values()){
@@ -34,6 +35,8 @@ public class Deck {
                 this.cards.add(card);
             }
         }
+
+        shuffle();
     }
 
     @Override

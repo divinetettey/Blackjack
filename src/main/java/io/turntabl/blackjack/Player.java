@@ -18,6 +18,10 @@ public class Player {
         this.hand = hand;
     }
 
+    public Player(String name){
+        this.name = name;
+    }
+
     private boolean canPlay() {
 
         return false;
@@ -79,4 +83,17 @@ public class Player {
     public void setStrategy(String strategy) {
         this.strategy = strategy;
     }
+
+
+    public void checkStatus(){
+        if(valueOfHand < 17){
+            setStatus(PlayerStatus.HIT);
+        } else if(valueOfHand >= 17 && valueOfHand < 21){
+            setStatus(PlayerStatus.STICK);
+        } else if(valueOfHand > 21){
+            setStatus(PlayerStatus.BUST);
+        }
+    }
+
+
 }
