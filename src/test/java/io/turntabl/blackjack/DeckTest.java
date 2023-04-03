@@ -1,6 +1,12 @@
 package io.turntabl.blackjack;
 
 
+import junit.framework.Assert;
+import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+
 import java.util.Stack;
 
 public class DeckTest extends TestCase {
@@ -8,31 +14,23 @@ public class DeckTest extends TestCase {
     @Mock
     Deck deck = new Deck();
 
-    @BeforeClass
+    @BeforeEach
     public void setup() {
         deck.initialize();
     }
 
     @Test
     public void testDeckSize() {
-        System.out.println(deck.getCards().toString());
         Assert.assertEquals(52, deck.getCards().size());
     }
 
+    @Test
     public void testShuffle() {
-        System.out.println(deck.getCards().toString());
         Card cardBeforeShuffle = deck.getCards().firstElement();
         deck.shuffle();
 
         Card cardAfterShuffle = deck.getCards().firstElement();
-        Assert.assertNotEquals(cardBeforeShuffle, cardAfterShuffle);
+        Assert.assertNotSame(cardBeforeShuffle, cardAfterShuffle);
     }
 
-
-    @Test
-    public void testHasInitializeEntireDeck() {
-       Stack<Card> cardStack =  deck.getCards();
-
-
-    }
 }
