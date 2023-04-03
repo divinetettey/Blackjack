@@ -1,6 +1,5 @@
 package io.turntabl.blackjack;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,18 +26,18 @@ public class PlayerTest extends TestCase {
     @Test
     public void testPlayerCanBeCreatedSuccessfully() {
         Player newPlayer = new Player("Player 2", new ArrayList<>());
-        Assert.assertEquals(0, newPlayer.getHand().size());
-        Assert.assertFalse(newPlayer.isHasWon());
-        Assert.assertNull(newPlayer.getStatus());
-        Assert.assertEquals(0, newPlayer.getValueOfHand());
+        assertEquals(0, newPlayer.getHand().size());
+        assertFalse(newPlayer.isHasWon());
+        assertNull(newPlayer.getStatus());
+        assertEquals(0, newPlayer.getValueOfHand());
     }
 
     @Test
     public void testCanAddCardSuccessfully() {
         player.addCard(card);
 
-        Assert.assertNotSame(0,player.getHand().size());
-        Assert.assertEquals(card.getRank().getRank(), player.getValueOfHand());
+       assertNotSame(0,player.getHand().size());
+       assertEquals(card.getRank().getRank(), player.getValueOfHand());
     }
 
 }

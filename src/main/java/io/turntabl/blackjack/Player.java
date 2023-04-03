@@ -3,7 +3,7 @@ package io.turntabl.blackjack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public final class Player {
 
     private String name;
     private List<Card> hand;
@@ -88,7 +88,7 @@ public class Player {
     public void checkStatus(){
         if(valueOfHand < 17){
             setStatus(PlayerStatus.HIT);
-        } else if(valueOfHand >= 17 && valueOfHand < 21){
+        } else if(valueOfHand < 21){
             setStatus(PlayerStatus.STICK);
         } else if(valueOfHand > 21){
             setStatus(PlayerStatus.BUST);
