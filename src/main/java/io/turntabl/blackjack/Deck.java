@@ -11,7 +11,7 @@ public class Deck {
         cards = new Stack<>();
     }
 
-    public Deck(Stack<Card> cards){
+    public  Deck(Stack<Card> cards){
         this.cards = cards;
     }
 
