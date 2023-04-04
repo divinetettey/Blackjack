@@ -51,10 +51,10 @@ public class Game {
      *
      */
     public void dealHands() {
-        for(int i = 0; i < playerList.size(); ++i){
+        for (Player player : playerList) {
 
-            for(int j = 0; j < 2; ++j){
-                playerList.get(i).addCard(
+            for (int j = 0; j < 2; ++j) {
+                player.addCard(
                         cardDeck.getCards().pop()
                 );
             }

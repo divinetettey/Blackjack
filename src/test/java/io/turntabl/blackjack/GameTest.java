@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest extends TestCase {
@@ -14,7 +16,7 @@ public class GameTest extends TestCase {
 
     @BeforeEach
     public void setup(){
-        game = new Game(3);
+        game = new Game(3, new ArrayList<>());
     }
 
     @Test
@@ -24,9 +26,7 @@ public class GameTest extends TestCase {
 
     @Test
     public void testIllegalArgumentExceptionIsThrown() {
-        Exception exception = assertThrows(IllegalArgumentException.class, ()-> {
-            new Game(10);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, ()-> new Game(10, new ArrayList<>()));
 
         String message = exception.getMessage();
         assertTrue(message.contains("Number of players must be between 2 "));

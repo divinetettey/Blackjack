@@ -85,20 +85,12 @@ public final class Player {
 
     public void checkStatus(){
         if(hand.size() >= 2){
-            switch (strategy){
-                case "always-stick":
-                    status = PlayerStatus.STICK;
-                    break;
-                case "always-hit":
-                    status = valueOfHand < 21 ? PlayerStatus.HIT : PlayerStatus.BUST; //to avoid infinite loop
-                    break;
-                case "risk-calculator":
-                    calculateRisk();
-                    break;
-                default:
-                    defaultStrategy();
-                    break;
-
+            switch (strategy) {
+                case "always-stick" -> status = PlayerStatus.STICK;
+                case "always-hit" ->
+                        status = valueOfHand < 21 ? PlayerStatus.HIT : PlayerStatus.BUST; //to avoid infinite loop
+                case "risk-calculator" -> calculateRisk();
+                default -> defaultStrategy();
             }
         }
     }
