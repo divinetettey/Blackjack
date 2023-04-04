@@ -67,6 +67,8 @@ public class Game {
         dealHands();
         applyRules();
 
+
+
         while(!gameEnd ){
             ++numRounds;
             System.out.println("ROUND "+numRounds + "\n********************************************");
@@ -90,6 +92,7 @@ public class Game {
             return;
         }
 
+        List<Player> stickPlayers = new ArrayList<>();
         for(Player player : playerList){
             if(player.getValueOfHand() == WINNING_SCORE) {
                 //Set the player hasWon to true
@@ -101,10 +104,15 @@ public class Game {
 
             //Check all players have stick
             if(player.getStatus() == PlayerStatus.STICK) {
-                ++numOfStick;
+                stickPlayers.add(player);
             }
         }
 
+        if(stickPlayers.size() == playerList.size() && this.winner == null){
+            gameEnd = true;
+            System.out.println("Remaining "+stickPlayers.size() + " have stick \n Game Ends");
+            return;
+        }
 
         newRound();
     }
@@ -126,7 +134,6 @@ public class Game {
                 player.addCard(cardDeck.getCards().pop());
 
                 System.out.println(player.getName() + " handed a new card " + player.getHand().toString() +" value of hand "+player.getValueOfHand());
-
             } else if(player.getStatus() == PlayerStatus.STICK){
                 System.out.println(player.getName() + " goes stick with total value of hand " + player.getValueOfHand());
             }

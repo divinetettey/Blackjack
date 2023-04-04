@@ -87,9 +87,11 @@ public final class Player {
 
             if(valueOfHand < 17){
                 status  = PlayerStatus.HIT;
-            } else if(valueOfHand < 21){
+            }  else if(valueOfHand < 21){
                 status = PlayerStatus.STICK;
-            } else if(valueOfHand > 21){
+            } else if(valueOfHand == 21) {
+                status = PlayerStatus.WON;
+            } else {
                 status = PlayerStatus.BUST;
             }
 
