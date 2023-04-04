@@ -23,12 +23,15 @@ public final class Player {
     }
 
     public void addCard(Card card) {
-        if(this.hand.isEmpty()) {
+        if(this.hand == null) {
             hand = new ArrayList<>();
         }
+
         hand.add(card);
         valueOfHand += card.getRank().getRank();
+        checkStatus();
     }
+
 
     public String getName() {
         return name;
@@ -80,14 +83,29 @@ public final class Player {
 
 
     public void checkStatus(){
-        if(valueOfHand < 17){
-            setStatus(PlayerStatus.HIT);
-        } else if(valueOfHand < 21){
-            setStatus(PlayerStatus.STICK);
-        } else if(valueOfHand > 21){
-            setStatus(PlayerStatus.BUST);
+        if(hand.size() >= 2){
+
+            if(valueOfHand < 17){
+                status  = PlayerStatus.HIT;
+            } else if(valueOfHand < 21){
+                status = PlayerStatus.STICK;
+            } else if(valueOfHand > 21){
+                status = PlayerStatus.BUST;
+            }
+
         }
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", hand=" + hand +
+                ", valueOfHand=" + valueOfHand +
+                ", hasWon=" + hasWon +
+                ", status=" + status +
+                ", strategy='" + strategy + '\'' +
+                '}';
+    }
 
 }
