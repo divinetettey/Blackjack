@@ -4,6 +4,6 @@ public enum PlayerStatus {
     HIT,
     STICK,
     BUST,
-    WON;
+    WON
 
 }

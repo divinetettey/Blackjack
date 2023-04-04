@@ -7,11 +7,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-import java.util.Stack;
-
 public class DeckTest extends TestCase {
 
     @Mock
+    final
     Deck deck = new Deck();
 
     @BeforeEach

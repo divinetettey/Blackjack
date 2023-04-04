@@ -4,15 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
-    private Deck cardDeck;
+    private final Deck cardDeck;
     private List<Player> playerList;
     private static final int MAX_NUM_OF_PLAYERS = 6;
 
     private static final int WINNING_SCORE = 21;
 
-    private int initialNumOfPlayers;
+    private final int initialNumOfPlayers;
     private boolean gameEnd = false;
-    int numOfStick = 0;
 
     private Player winner = null;
 
@@ -163,7 +162,4 @@ public class Game {
         return numRounds;
     }
 
-    public void setNumRounds(int numRounds) {
-        this.numRounds = numRounds;
-    }
 }

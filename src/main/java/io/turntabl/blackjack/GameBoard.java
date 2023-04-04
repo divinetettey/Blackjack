@@ -1,13 +1,10 @@
 package io.turntabl.blackjack;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class GameBoard {
 
     private static final int DEFAULT_NO_PLAYERS =6;
     public static void main(String[] args){
-        int numOfPlayers = DEFAULT_NO_PLAYERS;
+       // int numOfPlayers = DEFAULT_NO_PLAYERS;
         System.out.println("Welcome To Blackjack");
 
         Game game = new Game(DEFAULT_NO_PLAYERS);

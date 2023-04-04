@@ -1,7 +1,6 @@
 package io.turntabl.blackjack;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Stack;
 
 public class Deck {
