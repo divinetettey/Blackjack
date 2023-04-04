@@ -17,7 +17,7 @@ public class Game {
 
     private int numRounds = 1;
 
-    public Game(int numberOfPlayers) {
+    public Game(int numberOfPlayers, List<String> strategyList) {
         //this.NUM_OF_PLAYERS = NUM_OF_PLAYERS;
         this.initialNumOfPlayers = numberOfPlayers;
         if(numberOfPlayers <= 1 || numberOfPlayers > MAX_NUM_OF_PLAYERS) {
@@ -27,19 +27,21 @@ public class Game {
         cardDeck = new Deck();
         cardDeck.initialize();
 
-        setupPlayers();
+        setupPlayers(strategyList);
 
         //Do not deal hands on game initialization, dealHands should be called when game starts
         //dealHands();
     }
 
-    public void setupPlayers(){
+    public void setupPlayers(List<String> strategyList){
         if(playerList == null){
             playerList = new ArrayList<>();
         }
 
         for(int i = 1; i <= this.initialNumOfPlayers; i++){
-            Player player = new Player("Player "+i);
+            String strategy = strategyList.isEmpty() ? "default" : strategyList.get(i-1);
+
+            Player player = new Player("Player "+i, strategy);
             playerList.add(player);
         }
     }
@@ -92,6 +94,7 @@ public class Game {
         }
 
         List<Player> stickPlayers = new ArrayList<>();
+
         for(Player player : playerList){
             if(player.getValueOfHand() == WINNING_SCORE) {
                 //Set the player hasWon to true
@@ -112,6 +115,8 @@ public class Game {
             System.out.println("Remaining "+stickPlayers.size() + " have stick \n Game Ends");
             return;
         }
+
+        //TODO: all hit and get above the limit should bust
 
         newRound();
     }

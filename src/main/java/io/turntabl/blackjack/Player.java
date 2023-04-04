@@ -18,8 +18,9 @@ public final class Player {
         this.hand = hand;
     }
 
-    public Player(String name){
+    public Player(String name, String strategy){
         this.name = name;
+        this.strategy = strategy;
     }
 
     public void addCard(Card card) {
@@ -84,17 +85,45 @@ public final class Player {
 
     public void checkStatus(){
         if(hand.size() >= 2){
+            switch (strategy){
+                case "always-stick":
+                    status = PlayerStatus.STICK;
+                    break;
+                case "always-hit":
+                    status = valueOfHand < 21 ? PlayerStatus.HIT : PlayerStatus.BUST; //to avoid infinite loop
+                    break;
+                case "risk-calculator":
+                    calculateRisk();
+                    break;
+                default:
+                    defaultStrategy();
+                    break;
 
-            if(valueOfHand < 17){
-                status  = PlayerStatus.HIT;
-            }  else if(valueOfHand < 21){
-                status = PlayerStatus.STICK;
-            } else if(valueOfHand == 21) {
-                status = PlayerStatus.WON;
-            } else {
-                status = PlayerStatus.BUST;
             }
+        }
+    }
 
+    private void calculateRisk() {
+        //if hand is closer to 21 by 3 we stick
+        //if hand is less 10, we hit
+        if(21 - valueOfHand <= 3){
+            status = PlayerStatus.STICK;
+        } else if (valueOfHand <= 10){
+            status = PlayerStatus.HIT;
+        } else {
+            status = PlayerStatus.STICK;
+        }
+    }
+
+    private void defaultStrategy(){
+        if(valueOfHand < 17){
+            status  = PlayerStatus.HIT;
+        }  else if(valueOfHand < 21){
+            status = PlayerStatus.STICK;
+        } else if(valueOfHand == 21) {
+            status = PlayerStatus.WON;
+        } else {
+            status = PlayerStatus.BUST;
         }
     }
 

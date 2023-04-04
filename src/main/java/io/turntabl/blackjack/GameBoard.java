@@ -12,8 +12,9 @@ public class GameBoard {
         System.out.println("Welcome To Blackjack");
 
 
+        List<String> strategies = new ArrayList<>();
+
         for (int i = 0; i < args.length; i++) {
-            List<String> strategies = new ArrayList<>();
             if (args[i].equals("--player") && i + 1 < args.length) {
                 strategies.add(args[i + 1]);
                 i++;
@@ -32,7 +33,7 @@ public class GameBoard {
             //TODO: get shuffle type also from command line
         }
 
-        Game game = new Game(numOfPlayers);
+        Game game = new Game(numOfPlayers, strategies);
         game.play();
 
         //TODO: Implement the game and play
