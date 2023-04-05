@@ -1,5 +1,7 @@
 package io.turntabl.blackjack;
 
+import io.turntabl.blackjack.players.Player;
+import io.turntabl.blackjack.players.PlayerStatus;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

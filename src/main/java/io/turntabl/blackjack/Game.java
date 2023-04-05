@@ -1,5 +1,9 @@
 package io.turntabl.blackjack;
 
+import io.turntabl.blackjack.cards.Deck;
+import io.turntabl.blackjack.players.Player;
+import io.turntabl.blackjack.players.PlayerStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +21,12 @@ public class Game {
 
     private int numRounds = 1;
 
+    /**
+     * initialize a new game with number fo players and a list of strategies
+     * @param numberOfPlayers
+     * @param strategyList
+     */
     public Game(int numberOfPlayers, List<String> strategyList) {
-        //this.NUM_OF_PLAYERS = NUM_OF_PLAYERS;
         this.initialNumOfPlayers = numberOfPlayers;
         if(numberOfPlayers <= 1 || numberOfPlayers > MAX_NUM_OF_PLAYERS) {
             //we cannot start game here
@@ -28,11 +36,12 @@ public class Game {
         cardDeck.initialize();
 
         setupPlayers(strategyList);
-
-        //Do not deal hands on game initialization, dealHands should be called when game starts
-        //dealHands();
     }
 
+    /**
+     * setup new players. passing a strategy to the players.
+     * @param strategyList
+     */
     public void setupPlayers(List<String> strategyList){
         if(playerList == null){
             playerList = new ArrayList<>();
@@ -47,34 +56,31 @@ public class Game {
     }
 
     /**
-     * deal initial two cards to players
-     *
+     * deal initial two cards to each player
      */
     public void dealHands() {
         for (Player player : playerList) {
-
             for (int j = 0; j < 2; ++j) {
                 player.addCard(
                         cardDeck.getCards().pop()
                 );
             }
-
-
         }
     }
 
+    /**
+     * play game
+     */
     public void play(){
         System.out.println("ROUND "+numRounds + "\n***********************************************");
         dealHands();
         applyRules();
 
 
-
         while(!gameEnd ){
             ++numRounds;
             System.out.println("ROUND "+numRounds + "\n********************************************");
             applyRules();
-
         }
 
 
@@ -82,10 +88,11 @@ public class Game {
         if(winner != null){
             System.out.println(winner.getName() + " has won with a hand of "+winner.getValueOfHand());
         }
-
-
     }
 
+    /**
+     * apply rules to the game
+     */
     public void applyRules(){
         if(playerList.size() == 1){
             System.out.println("Only "+playerList.get(0).getName()+" is left in the game");
@@ -116,12 +123,12 @@ public class Game {
             return;
         }
 
-        //TODO: all hit and get above the limit should bust
-
         newRound();
     }
 
-
+    /**
+     * start a new round of the game play
+     */
     public void newRound(){
         //check player status
         List<Player> playersGoneBust = new ArrayList<>();
@@ -143,7 +150,7 @@ public class Game {
             }
         }
 
-        playerList.removeAll(playersGoneBust);
+        playerList.removeAll(playersGoneBust); //remove all players that have gone bust before the next iteration of our game
     }
 
 

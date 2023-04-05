@@ -1,4 +1,4 @@
-package io.turntabl.blackjack;
+package io.turntabl.blackjack.cards;
 
 public class Card {
     private Suit suit;
@@ -11,6 +11,9 @@ public class Card {
         setSuitRank();
     }
 
+    /**
+     * set the rand for some of the suits
+     */
     public void setSuitRank() {
         if(this.rank == Rank.ACE){
             this.rank.setRank(11);

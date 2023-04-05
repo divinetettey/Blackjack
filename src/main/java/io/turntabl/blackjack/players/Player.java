@@ -1,4 +1,6 @@
-package io.turntabl.blackjack;
+package io.turntabl.blackjack.players;
+
+import io.turntabl.blackjack.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,11 @@ public final class Player {
         this.strategy = strategy;
     }
 
+    /**
+     * add new card to the players hand
+     *
+     * @param card
+     */
     public void addCard(Card card) {
         if(this.hand == null) {
             hand = new ArrayList<>();
@@ -83,6 +90,10 @@ public final class Player {
     }
 
 
+    /**
+     * check the status of the player
+     * use a strategy to assign as specific strategy to the player
+     */
     public void checkStatus(){
         if(hand.size() >= 2){
             switch (strategy) {
@@ -95,6 +106,9 @@ public final class Player {
         }
     }
 
+    /**
+     * calculate a risky status change for the user
+     */
     private void calculateRisk() {
         //if hand is closer to 21 by 3 we stick
         //if hand is less 10, we hit
@@ -107,6 +121,9 @@ public final class Player {
         }
     }
 
+    /**
+     * default strategy for the player
+     */
     private void defaultStrategy(){
         if(valueOfHand < 17){
             status  = PlayerStatus.HIT;

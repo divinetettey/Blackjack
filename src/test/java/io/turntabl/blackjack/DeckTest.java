@@ -1,6 +1,8 @@
 package io.turntabl.blackjack;
 
 
+import io.turntabl.blackjack.cards.Card;
+import io.turntabl.blackjack.cards.Deck;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.BeforeEach;

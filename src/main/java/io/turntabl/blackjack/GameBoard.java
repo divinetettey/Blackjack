@@ -5,17 +5,28 @@ import java.util.List;
 
 public class GameBoard {
 
-    private static final int DEFAULT_NO_PLAYERS =3;
+    private static int numOfPlayers =3;
+    private static List<String> strategyList = new ArrayList<>();
+
     public static void main(String[] args) {
-        int numOfPlayers = DEFAULT_NO_PLAYERS;
         System.out.println("Welcome To Blackjack");
 
 
-        List<String> strategies = new ArrayList<>();
+        getArguments(args);
+
+        Game game = new Game(numOfPlayers, strategyList);
+        game.play();
+    }
+
+    /**
+     * get arguments from the CLI passed to the program
+     * @param args
+     */
+    private static  void getArguments(String[] args){
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("--player") && i + 1 < args.length) {
-                strategies.add(args[i + 1]);
+                strategyList.add(args[i + 1]);
                 i++;
             }
             //Adjust number of players to be also retrieved from command line
@@ -31,11 +42,5 @@ public class GameBoard {
 
             //TODO: get shuffle type also from command line
         }
-
-        Game game = new Game(numOfPlayers, strategies);
-        game.play();
-
-        //TODO: Implement the game and play
-
     }
 }

@@ -1,4 +1,4 @@
-package io.turntabl.blackjack;
+package io.turntabl.blackjack.cards;
 
 public enum Rank {
 
