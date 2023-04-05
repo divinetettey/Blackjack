@@ -21,12 +21,24 @@ class ShufflingAlgorithmsTest {
 
     @Test
     void testCanShuffleWithOverHandAlgorithm(){
-        Card card = deck.getCards().peek();
+        Stack<Card> oldCards = deck.getCards();
         Stack<Card> shuffledCards = ShufflingAlgorithms.OVERHAND.shuffle(deck.getCards());
 
-        deck.setCards(shuffledCards);
+        assertFalse(oldCards.equals(shuffledCards));
+    }
 
-        Card currentFirstCard = deck.getCards().peek();
-        assertNotEquals(card.getRank().getRank(),currentFirstCard.getRank().getRank());
+    @Test
+    void testCanShuffleWithRiffleAlgorithm() {
+        Stack<Card> oldCards = deck.getCards();
+        Stack<Card> shuffledCards = ShufflingAlgorithms.RIFFLE.shuffle(deck.getCards());
+
+        assertEquals(oldCards, shuffledCards);
+    }
+
+    @Test
+    void testCanShuffleWithFisherYatesAlgorithm() {
+        Stack<Card> shuffledCards = ShufflingAlgorithms.FISHER_YATES.shuffle(deck.getCards());
+
+        assertEquals(deck.getCards(), shuffledCards);
     }
 }

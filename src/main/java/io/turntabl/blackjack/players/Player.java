@@ -4,6 +4,7 @@ import io.turntabl.blackjack.cards.Card;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public final class Player {
 
@@ -147,5 +148,4 @@ public final class Player {
                 ", strategy='" + strategy + '\'' +
                 '}';
     }
-
 }
